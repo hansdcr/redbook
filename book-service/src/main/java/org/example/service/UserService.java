@@ -10,4 +10,12 @@ public interface UserService {
    * @return
    */
   public Users queryMobileIsExist(String mobile);
+
+  /**
+   * 创建用户信息，并返回用户对象
+   *
+   * @param mobile
+   * @return
+   */
+  public Users createUser(String mobile);
 }

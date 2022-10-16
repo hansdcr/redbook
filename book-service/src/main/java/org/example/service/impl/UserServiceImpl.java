@@ -18,4 +18,9 @@ public class UserServiceImpl implements UserService {
     Users users = usersMapper.selectOneByExample(userExample); // 开始发出查询请求
     return users;
   }
+
+  @Override
+  public Users createUser(String mobile) {
+    return null;
+  }
 }
