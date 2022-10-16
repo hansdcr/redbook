@@ -19,42 +19,34 @@ import javax.validation.Valid;
 @RequestMapping("passport")
 @Api(tags = "PassportController 通行证接口")
 public class PassportController extends BaseInfoProperties {
-    @Autowired
-    private SMSUtils smsUtils;
+  @Autowired private SMSUtils smsUtils;
 
-    @PostMapping("getSMSCode")
-    public GraceJSONResult getSMSCode(@RequestParam String mobile, HttpServletRequest request) throws Exception {
-        if (StringUtils.isNullOrEmpty(mobile)) {
-            return GraceJSONResult.ok();
-        }
-
-        // TODO 获取用户IP，限制用户IP在60s只能获取一次验证码
-        String userIp = IPUtil.getRequestIp(request);
-        redis.setnx60s(MOBILE_SMSCODE + ":" + userIp, userIp);
-
-
-        // 随机生成6位的验证码
-        String code = (int) ((Math.random() * 9 + 1) * 100000) + "";
-        smsUtils.sendSMS(mobile, code);
-        // 把验证码放入redis中用于后续验证
-        redis.set(MOBILE_SMSCODE + ":" + mobile, code, 60 * 30);
-        log.info("code={}", code);
-
-        //TODO 把验证码放入redis中
-
-        return GraceJSONResult.ok();
+  @PostMapping("getSMSCode")
+  public GraceJSONResult getSMSCode(@RequestParam String mobile, HttpServletRequest request)
+      throws Exception {
+    if (StringUtils.isNullOrEmpty(mobile)) {
+      return GraceJSONResult.ok();
     }
 
-    @PostMapping("login")
-    public GraceJSONResult login(@Valid @RequestBody RegistLoginBO registLoginBO,
-                                 BindingResult result,
-                                 HttpServletRequest request) {
-        // 对用户传递过来的参数格式校验
-        if (result.hasErrors()) {
-            return GraceJSONResult.errorMap(getErrors(result));
-        }
+    // TODO 获取用户IP，限制用户IP在60s只能获取一次验证码
+    String userIp = IPUtil.getRequestIp(request);
+    redis.setnx60s(MOBILE_SMSCODE + ":" + userIp, userIp);
 
-        return GraceJSONResult.ok();
+    // 随机生成6位的验证码
+    String code = (int) ((Math.random() * 9 + 1) * 100000) + "";
+    smsUtils.sendSMS(mobile, code);
+    // 把验证码放入redis中用于后续验证
+    redis.set(MOBILE_SMSCODE + ":" + mobile, code, 60 * 30);
+    log.info("code={}", code);
 
-    }
+    // TODO 把验证码放入redis中
+
+    return GraceJSONResult.ok();
+  }
+
+  @PostMapping("login")
+  public GraceJSONResult login(
+      @Valid @RequestBody RegistLoginBO registLoginBO, HttpServletRequest request) {
+    return GraceJSONResult.ok();
+  }
 }
