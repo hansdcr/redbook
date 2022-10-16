@@ -10,11 +10,13 @@ import org.example.utils.DateUtil;
 import org.example.utils.DesensitizationUtil;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 
+@Service
 public class UserServiceImpl implements UserService {
   @Autowired private UsersMapper usersMapper;
   @Autowired private Sid sid;
