@@ -1,0 +1,4 @@
+### 添加拦截器简要步骤
+1、创建自定义拦截器PassportInterceptor实现HandlerInterceptor
+2、定义配置类InterceptorConfig，使用@Configuration注解加入容器
+3、在配置类（InterceptorConfig）中注册拦截器（PassportInterceptor）以及拦截路径

@@ -4,7 +4,7 @@ import org.example.utils.RedisOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-public class BaseController {
+public class BaseInfoProperties {
     @Autowired
     public RedisOperator redis;
 

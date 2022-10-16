@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("passport")
 @Api(tags = "PassportController 通行证接口")
-public class PassportController extends BaseController{
+public class PassportController extends BaseInfoProperties{
     @Autowired
     private SMSUtils smsUtils;
 
