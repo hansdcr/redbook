@@ -1,4 +1,4 @@
-package com.grace.result;
+package org.example.result;
 
 public enum ResponseStatusEnum {
     SUCCESS(200, true, "操作成功！"),

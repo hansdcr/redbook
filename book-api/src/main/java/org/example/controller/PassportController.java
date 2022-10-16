@@ -1,8 +1,7 @@
 package org.example.controller;
 
-import com.grace.result.GraceJSONResult;
+import org.example.result.GraceJSONResult;
 import com.mysql.jdbc.StringUtils;
-import io.netty.util.internal.StringUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.example.utils.IPUtil;
@@ -31,7 +30,7 @@ public class PassportController extends BaseInfoProperties{
 
         // TODO 获取用户IP，限制用户IP在60s只能获取一次验证码
         String userIp = IPUtil.getRequestIp(request);
-        redis.setnx(MOBILE_SMSCODE+":"+userIp,userIp);
+        redis.setnx60s(MOBILE_SMSCODE+":"+userIp,userIp);
 
 
         // 随机生成6位的验证码

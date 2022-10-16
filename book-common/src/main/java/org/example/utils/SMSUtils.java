@@ -7,9 +7,11 @@ import com.tencentcloudapi.common.profile.HttpProfile;
 import com.tencentcloudapi.sms.v20210111.SmsClient;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsRequest;
 import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class SMSUtils {
     @Autowired
@@ -50,15 +52,15 @@ public class SMSUtils {
             req.setTemplateId("1573671");       // 模板id：必须填写已审核通过的模板 ID。模板ID可登录 [短信控制台] 查看
 
             /* 模板参数（自定义占位变量）: 若无模板参数，则设置为空 */
-            String[] templateParamSet1 = {code};
+            String[] templateParamSet1 = {code,"1"};
             req.setTemplateParamSet(templateParamSet1);
 
             // 返回的resp是一个SendSmsResponse的实例，与请求对象对应
             SendSmsResponse resp = client.SendSms(req);
             // 输出json格式的字符串回包
-//            System.out.println(SendSmsResponse.toJsonString(resp));
+            log.info(SendSmsResponse.toJsonString(resp));
         } catch (TencentCloudSDKException e) {
-            System.out.println(e.toString());
+            log.info("sms send code error: "+e);
         }
     }
 

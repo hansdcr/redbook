@@ -2,7 +2,10 @@ package org.example.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.controller.BaseInfoProperties;
+import org.example.exceptions.GraceException;
+import org.example.result.ResponseStatusEnum;
 import org.example.utils.IPUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ public class PassportInterceptor extends BaseInfoProperties implements HandlerIn
 
         if (keyIsExist) {
             log.info("短信发送频率太大！");
+            GraceException.display(ResponseStatusEnum.SMS_NEED_WAIT_ERROR);
             return false;
         }
 

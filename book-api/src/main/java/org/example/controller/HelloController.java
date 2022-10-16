@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import com.grace.result.GraceJSONResult;
+import org.example.result.GraceJSONResult;
 import org.example.utils.SMSUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.grace.result;
+package org.example.result;
 
 import java.util.Map;
 
