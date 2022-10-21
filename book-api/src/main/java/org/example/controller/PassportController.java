@@ -56,11 +56,11 @@ public class PassportController extends BaseInfoProperties {
       @Valid @RequestBody RegistLoginBO registLoginBO, HttpServletRequest request) {
     String mobile = registLoginBO.getMobile();
     String code = registLoginBO.getSmscode();
-    // 1. 从redis中获得验证码进行校验是否匹配
-    String redisCode = redis.get(MOBILE_SMSCODE + ":" + mobile);
-    if (StringUtils.isNullOrEmpty(redisCode) || !redisCode.equalsIgnoreCase(code)) {
-      return GraceJSONResult.errorCustom(ResponseStatusEnum.SMS_CODE_ERROR);
-    }
+    //    // 1. 从redis中获得验证码进行校验是否匹配
+    //    String redisCode = redis.get(MOBILE_SMSCODE + ":" + mobile);
+    //    if (StringUtils.isNullOrEmpty(redisCode) || !redisCode.equalsIgnoreCase(code)) {
+    //      return GraceJSONResult.errorCustom(ResponseStatusEnum.SMS_CODE_ERROR);
+    //    }
 
     // 2 查询数据库，判断用户是否存在
     Users user = userService.queryMobileIsExist(mobile);
@@ -81,5 +81,11 @@ public class PassportController extends BaseInfoProperties {
     usersVO.setUserToken(uToken);
 
     return GraceJSONResult.ok(usersVO);
+  }
+
+  @PostMapping("logout")
+  public GraceJSONResult logout(@RequestParam String userId, HttpServletRequest request) {
+    redis.del(REDIS_USER_TOKEN + ":" + userId);
+    return GraceJSONResult.ok();
   }
 }
