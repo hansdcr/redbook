@@ -7,14 +7,15 @@ import org.apache.kafka.common.config.ConfigResource;
 import java.util.*;
 
 public class AdminSample {
-  public static final String TOPIC_NAME = "hans_topic";
+  public static final String TOPIC_NAME = "hans_topic_02";
 
   public static void main(String[] args) throws Exception {
     // AdminClient adminClient = AdminSample.adminClient();
 
     // createTopic();
 
-    topicLists();
+    //    topicLists();
+    incrPartitions(2);
   }
 
   /*
@@ -160,7 +161,7 @@ public class AdminSample {
     AdminClient adminClient = adminClient();
     // 副本因子
     Short rs = 1;
-    NewTopic newTopic = new NewTopic(TOPIC_NAME, 1, rs);
+    NewTopic newTopic = new NewTopic(TOPIC_NAME, 2, rs);
     CreateTopicsResult topics = adminClient.createTopics(Arrays.asList(newTopic));
     System.out.println("CreateTopicsResult : " + topics);
   }
