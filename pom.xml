@@ -14,6 +14,7 @@
         <module>book-mapper</module>
         <module>book-service</module>
         <module>book-api</module>
+        <module>kafkademo01</module>
     </modules>
 
     <properties>
