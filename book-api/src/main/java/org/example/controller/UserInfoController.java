@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("passport")
+@RequestMapping("userinfo")
 @Api(tags = "UserInfoController 用户信息接口")
 public class UserInfoController {}

@@ -18,4 +18,12 @@ public interface UserService {
    * @return
    */
   public Users createUser(String mobile);
+
+  /**
+   * 通过主键userId获取用户信息
+   *
+   * @param userId
+   * @return
+   */
+  public Users getUser(String userId);
 }
